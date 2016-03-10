@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reliacoatInventory", "reliacoatInventory1.1\reliacoatInventory.csproj", "{DDE68B3A-E078-46B1-A276-64B774785C42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mongoDBassembly", "mongoDBassembly\mongoDBassembly.csproj", "{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTextSharpAssembly", "iTextSharpAssembly\iTextSharpAssembly.csproj", "{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{0592D726-EB95-4350-90EC-79E530196A9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDE68B3A-E078-46B1-A276-64B774785C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE68B3A-E078-46B1-A276-64B774785C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE68B3A-E078-46B1-A276-64B774785C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE68B3A-E078-46B1-A276-64B774785C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0592D726-EB95-4350-90EC-79E530196A9F}.Debug|Any CPU.ActiveCfg = Debug
+		{0592D726-EB95-4350-90EC-79E530196A9F}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

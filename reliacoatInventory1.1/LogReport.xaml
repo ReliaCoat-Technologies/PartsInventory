@@ -1,0 +1,55 @@
+﻿<Window x:Class="reliacoatInventory.LogReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:reliacoatInventory"
+        mc:Ignorable="d"
+        Title="LogReport" Height="500" Width="900" ResizeMode="CanMinimize">
+    <Grid Style="{DynamicResource GridTemplate}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 1 Column 1 - Dates -->
+
+        <Label x:Name="startDateLabel" Grid.Row="0" Grid.Column="0" Content="Start Date" Margin="10, 10, 355, 35"/>
+        <Label x:Name="endDateLabel" Grid.Row="0" Grid.Column="0" Content="End Date (Inclusive)" Margin="355, 10, 10, 35"/>
+        <DatePicker x:Name="startDate" Margin="10,35,355,5" CalendarStyle="{DynamicResource CalendarStyle1}"/>
+        <DatePicker x:Name="endDate" Margin="355, 35, 10, 5" CalendarStyle="{DynamicResource CalendarStyle1}"/>
+
+        <!-- Row 1 Columns 2,3 - Create Log Report Button-->
+
+        <Button x:Name="createLogReport" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Create Log Report" Margin="10,5" Click="createLogReportDataGrid"/>
+
+        <!-- Row 2 Column 1 - Filter Criteria -->
+
+        <Label x:Name="itemLabel" Grid.Row="1" Grid.Column="0" Content="Item" Margin="10,5,470,35"/>
+        <Label x:Name="userLabel" Grid.Row="1" Grid.Column="0" Content="User" Margin="240,5,240,35"/>
+        <Label x:Name="accountLabel" Grid.Row="1" Grid.Column="0" Content="Account" Margin="465,5,15,35"/>
+        <ComboBox x:Name="itemComboBox" Grid.Row="1" Grid.Column="0" Margin="10,35,465,5"/>
+        <ComboBox x:Name="userComboBox" Grid.Row="1" Grid.Column="0" Margin="240, 35, 240, 5"/>
+        <ComboBox x:Name="accountComboBox" Grid.Row="1" Grid.Column="0" Margin="465,35,10,5"/>
+
+        <!-- Row 2 Column 2 - Export CSV button -->
+
+        <Button x:Name="exportCSV" Grid.Row="1" Grid.Column="1" Margin="10,5,5,5" Content="Export CSV" Click="exportToCsv"/>
+
+        <!-- Row 2 Column 3 - Print Log button -->
+
+        <Button x:Name="printLog" Grid.Row="1" Grid.Column="2" Margin="5,5,10,5" Content="Print Log" Click="printLogToPDF"/>
+
+        <!-- Row 3 - DataGrid -->
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="10, 5, 10, 10" ItemsSource="{Binding}"/>
+
+    </Grid>
+</Window>
