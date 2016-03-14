@@ -40,6 +40,20 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Mvvm.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Spreadsheet.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Charts.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Core.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.2.Core, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.NavBar.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Spreadsheet.v15.2, Version=15.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="itextsharp, Version=5.5.7.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.7\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
@@ -59,6 +73,8 @@
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +84,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -80,11 +98,23 @@
     <Compile Include="LogReport.xaml.cs">
       <DependentUpon>LogReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReliacoatInventory.xaml.cs">
+      <DependentUpon>ReliacoatInventory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="reviseItems.xaml.cs">
       <DependentUpon>reviseItems.xaml</DependentUpon>
     </Compile>
     <Compile Include="UsersAndAccounts.xaml.cs">
       <DependentUpon>UsersAndAccounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\InventoryLogViewModel.cs" />
+    <Compile Include="ViewModels\ItemInventoryViewModel.cs" />
+    <Compile Include="ViewModels\ReliacoatInventoryViewModel.cs" />
+    <Compile Include="Views\InventoryLog.xaml.cs">
+      <DependentUpon>InventoryLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemInventory.xaml.cs">
+      <DependentUpon>ItemInventory.xaml</DependentUpon>
     </Compile>
     <Page Include="LogReport.xaml">
       <SubType>Designer</SubType>
@@ -103,7 +133,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ReliaCoatStyleDictionary.xaml">
+    <Page Include="ReliacoatInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,6 +142,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UsersAndAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InventoryLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ItemInventory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +168,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -149,9 +188,9 @@
       <Project>{4e5d9c1f-e426-46ee-9075-6d1c6ad3d777}</Project>
       <Name>iTextSharpAssembly</Name>
     </ProjectReference>
-    <ProjectReference Include="..\mongoDBassembly\mongoDBassembly.csproj">
+    <ProjectReference Include="..\mongoDBassembly\DataModel.csproj">
       <Project>{70b90fa5-4e22-42d6-a78d-6fa0dfb3c330}</Project>
-      <Name>mongoDBassembly</Name>
+      <Name>DataModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

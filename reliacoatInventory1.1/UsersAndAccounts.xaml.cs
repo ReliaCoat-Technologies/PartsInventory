@@ -12,10 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using mongoDBassembly;
-using static mongoDBassembly.SimpleID;
+using DataModel;
+using static DataModel.SimpleID;
 
-namespace reliacoatInventory
+namespace Inventory
 {
     /// <summary>
     /// Interaction logic for UsersAndAccounts.xaml
@@ -61,8 +61,8 @@ namespace reliacoatInventory
             var userList = await getIDListMongoDB("Users");
             var accountList = await getIDListMongoDB("Accounts");
             
-            userListBox.ItemsSource = userList.Select(o => o.value);
-            accountListBox.ItemsSource = accountList.Select(o => o.value);
+            // userListBox.ItemsSource = userList.Select(o => o.value);
+            // accountListBox.ItemsSource = accountList.Select(o => o.value);
 
             userTextBox.Text = "";
             accountTextBox.Text = "";

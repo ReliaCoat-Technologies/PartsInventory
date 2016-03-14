@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace reliacoatInventory.Properties {
+namespace Inventory.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

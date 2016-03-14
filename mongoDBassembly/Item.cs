@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Collections.ObjectModel;
 
-namespace mongoDBassembly
+namespace DataModel
 {
     public sealed class Item
     {
@@ -18,7 +19,7 @@ namespace mongoDBassembly
         public static string collection = "Items";
         public static string itemField = "item";
 
-        public async static Task<List<Item>> getItemListMongoDB()
+        public async static Task<ObservableCollection<Item>> getItemListMongoDB()
         {
             var itemCol = MongoDBServer<Item>.openMongoDB(collection);
 
@@ -28,7 +29,7 @@ namespace mongoDBassembly
                 .Sort(sort)
                 .ToListAsync();
 
-            return colList;
+            return new ObservableCollection<Item>(colList);
         }
 
         public async static Task<Item> getItemMongoDB(string itemName)

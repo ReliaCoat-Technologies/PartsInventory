@@ -18,15 +18,15 @@ using System.IO;
 using iTextSharp.text.pdf;
 using System.Diagnostics;
 using iTextSharp.text;
-using mongoDBassembly;
+using DataModel;
 using iTextSharpAssembly;
-using static mongoDBassembly.InventoryLog;
-using static mongoDBassembly.SimpleID;
-using static mongoDBassembly.Item;
+using static DataModel.InventoryLog;
+using static DataModel.SimpleID;
+using static DataModel.Item;
 using static iTextSharpAssembly.PrintToPDF;
-using static reliacoatInventory.StaticHelperMethods;
+using static Inventory.StaticHelperMethods;
 
-namespace reliacoatInventory
+namespace Inventory
 {
     /// <summary>
     /// Interaction logic for LogReport.xaml
@@ -90,15 +90,15 @@ namespace reliacoatInventory
         private async void refreshLG()
         {
             var itemList = await getItemListMongoDB();
-            addToComboBox(itemComboBox, itemList);
+            // addToComboBox(itemComboBox, itemList);
             itemComboBox.SelectedItem = "(all)";
 
             var userList = await getIDListMongoDB("Users");
-            addToComboBox(userComboBox, userList);
+            // addToComboBox(userComboBox, userList);
             userComboBox.SelectedItem = "(all)";
 
             var accountList = await getIDListMongoDB("Accounts");
-            addToComboBox(accountComboBox, accountList);
+            // addToComboBox(accountComboBox, accountList);
             accountComboBox.SelectedItem = "(all)";
         }
 

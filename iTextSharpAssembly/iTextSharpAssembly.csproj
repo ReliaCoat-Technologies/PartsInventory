@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\mongoDBassembly\mongoDBassembly.csproj">
+    <ProjectReference Include="..\mongoDBassembly\DataModel.csproj">
       <Project>{70b90fa5-4e22-42d6-a78d-6fa0dfb3c330}</Project>
-      <Name>mongoDBassembly</Name>
+      <Name>DataModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

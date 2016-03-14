@@ -1,14 +1,7 @@
 ﻿<Application
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:reliacoatInventory"
-             x:Class="reliacoatInventory.App"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ReliaCoatStyleDictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Application.Resources>
+             xmlns:local="clr-namespace:Inventory"
+             x:Class="Inventory.App"
+             StartupUri="ReliaCoatInventory.xaml">
 </Application>

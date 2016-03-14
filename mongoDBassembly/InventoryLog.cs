@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using System.Collections.ObjectModel;
 
-namespace mongoDBassembly
+namespace DataModel
 {
     public sealed class InventoryLog
     {
@@ -25,10 +26,10 @@ namespace mongoDBassembly
         public async static Task<List<InventoryLog>> getLogEntryList()
         {
             var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
-            var filter = Builders<InventoryLog>.Filter.Exists("_itemID");
+            var filter = Builders<InventoryLog>.Filter.Exists("_id");
             var logList = await logCol.Find(filter).ToListAsync();
 
-            return logList;
+            return new List<InventoryLog>(logList);
         }
 
         public async static Task<List<InventoryLog>> getLogEntryList(FilterDefinition<InventoryLog> finalFilter)

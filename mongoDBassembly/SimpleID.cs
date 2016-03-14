@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Collections.ObjectModel;
 
-namespace mongoDBassembly
+namespace DataModel
 {
     public class SimpleID
     {
@@ -15,13 +16,17 @@ namespace mongoDBassembly
         public ObjectId Id { get; set; }
         public string value { get; set; }
 
-        public async static Task<List<SimpleID>> getIDListMongoDB(string collection)
+        public async static Task<ObservableCollection<string>> getIDListMongoDB(string collection)
         {
             var col = MongoDBServer<SimpleID>.openMongoDB(collection);
             var filter = Builders<SimpleID>.Filter.Exists("Id");
-            var simpleIDList = await col.Find(filter).ToListAsync();
+            var simpleIDListRaw = await col.Find(filter).ToListAsync();
 
-            return simpleIDList;   
+            var simpleIDList = from item in simpleIDListRaw
+                               orderby item.value
+                               select item.value;
+
+            return new ObservableCollection<string>(simpleIDList.ToList());
         }
 
         public async static Task<SimpleID> getIDMongoDB(string value, string collection)

@@ -13,10 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using mongoDBassembly;
-using static mongoDBassembly.Item;
+using DataModel;
+using static DataModel.Item;
 
-namespace reliacoatInventory
+namespace Inventory
 {
     /// <summary>
     /// Interaction logic for reviseItems.xaml

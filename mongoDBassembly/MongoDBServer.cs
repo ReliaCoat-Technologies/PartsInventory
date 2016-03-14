@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace mongoDBassembly
+namespace DataModel
 {
     class MongoDBServer<POCOType>
     {

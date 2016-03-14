@@ -13,7 +13,7 @@ using System.Windows.Input;
 using MongoDB.Driver;
 using MongoDB.Bson;
 
-namespace reliacoatInventory
+namespace Inventory
 {
     class StaticHelperMethods
     {

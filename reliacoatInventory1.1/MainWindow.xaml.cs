@@ -19,13 +19,13 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.ComponentModel;
 using System.Diagnostics;
-using mongoDBassembly;
-using static mongoDBassembly.Item;
-using static mongoDBassembly.SimpleID;
-using static reliacoatInventory.StaticHelperMethods;
+using DataModel;
+using static DataModel.Item;
+using static DataModel.SimpleID;
+using static Inventory.StaticHelperMethods;
 using static iTextSharpAssembly.PrintToPDF;
 
-namespace reliacoatInventory
+namespace Inventory
 {
 
     public partial class MainWindow : Window
@@ -148,7 +148,7 @@ namespace reliacoatInventory
         private async void printInventory(object sender, RoutedEventArgs e)
         {
             var itemList = await getItemListMongoDB();
-            PrintItemsToPDF(itemList);
+            // PrintItemsToPDF(itemList);
         }
 
         private void exportToCsv(object sender, RoutedEventArgs e)
@@ -198,12 +198,12 @@ namespace reliacoatInventory
             dataGrid.Columns[2].Width = 50;
 
             var userList = await getIDListMongoDB("Users");
-            var bindingUserList = new BindingList<string>(userList.Select(o => o.value).ToList());
-            userComboBox.ItemsSource = bindingUserList;
+            // var bindingUserList = new BindingList<string>(userList.Select(o => o.value).ToList());
+            // userComboBox.ItemsSource = bindingUserList;
 
             var accountList = await getIDListMongoDB("Accounts");
-            var bindingAccountList = new BindingList<string>(accountList.Select(o => o.value).ToList());
-            accountComboBox.ItemsSource = bindingAccountList;
+            // var bindingAccountList = new BindingList<string>(accountList.Select(o => o.value).ToList());
+            // accountComboBox.ItemsSource = bindingAccountList;
         }
 
         private void generateLogReportWindow(object sender, RoutedEventArgs e)
