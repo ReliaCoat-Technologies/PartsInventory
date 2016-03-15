@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReliacoatInventory", "ReliacoatInventory\ReliacoatInventory.csproj", "{31F36218-442E-424F-9D34-020D214C8380}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator", "DXApplication1\ReportGenerator\ReportGenerator.csproj", "{5C398359-A7B1-48D7-8983-796E0352587F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{31F36218-442E-424F-9D34-020D214C8380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31F36218-442E-424F-9D34-020D214C8380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31F36218-442E-424F-9D34-020D214C8380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C398359-A7B1-48D7-8983-796E0352587F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C398359-A7B1-48D7-8983-796E0352587F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C398359-A7B1-48D7-8983-796E0352587F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C398359-A7B1-48D7-8983-796E0352587F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

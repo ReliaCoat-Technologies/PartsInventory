@@ -10,6 +10,13 @@
              mc:Ignorable="d"
              DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ItemInventoryViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ExportTitle">
+            <dxe:TextEdit IsPrintingMode="True" Text="Inventory Report"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <DockPanel>
 
         <StackPanel DockPanel.Dock="Bottom">
@@ -49,7 +56,7 @@
 
             </UniformGrid>
 
-            <Button Content="Export" Margin="5" Click="ItemExport" />
+            <Button Content="Export" Margin="5" Command="{Binding createReportCommand}"/>
 
         </StackPanel>
 

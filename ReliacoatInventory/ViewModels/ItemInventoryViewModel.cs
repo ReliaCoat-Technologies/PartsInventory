@@ -122,33 +122,10 @@ namespace ReliacoatInventory.ViewModels
             }
         }
 
-        public void exportToCsv()
+        public void createReport()
         {
-            using (var writer = File.CreateText("itemExport.csv"))
-            {
-                var header = new List<string>
-                {
-                    "Item ID",
-                    "Description",
-                    "Quantity"
-                };
-
-                writer.WriteLine(string.Join(",", header));
-
-                foreach (var item in itemList)
-                {
-                    var toCSV = new List<string>
-                    {
-                        item.item.Replace(',', ';'),
-                        item.description.Replace(',', ';'),
-                        item.quantity.ToString()
-                    };
-
-                    writer.WriteLine(string.Join(",", toCSV));
-                }
-            }
-
-            Process.Start("itemExport.csv");
+            var report = new ReportGenerator.MainWindow(itemList);
+            report.Show();
         }
     }
 }
