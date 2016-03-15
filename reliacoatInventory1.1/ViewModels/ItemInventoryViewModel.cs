@@ -5,8 +5,11 @@ using DevExpress.Mvvm;
 using System.Collections.ObjectModel;
 using DevExpress.Mvvm.POCO;
 using System.Windows;
+using System.IO;
+using System.Collections.Generic;
+using System.Diagnostics;
 
-namespace reliacoatInventory.ViewModels
+namespace Inventory.ViewModels
 {
     [POCOViewModel]
     public class ItemInventoryViewModel
@@ -15,9 +18,11 @@ namespace reliacoatInventory.ViewModels
         public virtual ObservableCollection<Item> itemList { get; set; }
         public virtual ObservableCollection<string> accountList { get; set; }
         public virtual ObservableCollection<string> userList { get; set; }
+        public virtual ObservableCollection<string> kitList { get; set; }
         public virtual Item item { get; set; }
         public virtual string user { get; set; }
         public virtual string account { get; set; }
+        public virtual string kit { get; set; }
         public virtual int qtyToAdd { get; set; }
         public virtual int qtyToRemove { get; set; }
         public virtual string statusBarText { get; set; }
@@ -25,7 +30,7 @@ namespace reliacoatInventory.ViewModels
         // Constructor
         public ItemInventoryViewModel()
         {
-            refreshUI();
+            refreshUIAsync();
             item = new Item();
             qtyToAdd = 0;
             qtyToRemove = 0;
@@ -37,14 +42,15 @@ namespace reliacoatInventory.ViewModels
         }
 
         // Methods
-        public async void refreshUI()
+        public async void refreshUIAsync()
         {
-            itemList = await Item.getItemListMongoDB();
-            userList = await SimpleID.getIDListMongoDB("Users");
-            accountList = await SimpleID.getIDListMongoDB("Accounts");
+            itemList = await Item.getItemListMongoDBAsync();
+            userList = await SimpleID.getIDListMongoDBAsync("Users");
+            kitList = await Kits.getKitListAsync();
+            accountList = await SimpleID.getIDListMongoDBAsync("Accounts");
         }
 
-        public void updateStock()
+        public async void updateStockAsync()
         {
             if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(account))
                 MessageBox.Show("Please select a user and account");
@@ -53,7 +59,7 @@ namespace reliacoatInventory.ViewModels
             else
             {
                 item.quantity = item.quantity + qtyToAdd - qtyToRemove;
-                item.setItemMongoDB();
+                await item.setItemMongoDBAsync();
             }
 
             var logEntry = new InventoryLog
@@ -68,14 +74,82 @@ namespace reliacoatInventory.ViewModels
                 dateTime = DateTime.UtcNow.ToLocalTime()
             };
 
-            logEntry.addLogToEntry();
+            await logEntry.addLogToEntryAsync();
 
             var addRemoveString = qtyToAdd - qtyToRemove >= 0 ? "added" : "removed";
             var quantityChanged = Math.Abs(qtyToAdd - qtyToRemove);
 
             statusBarText = $"{user} has {addRemoveString} {quantityChanged} of {item.item}({item.description})";
 
-            refreshUI();
+            refreshUIAsync();
+        }
+
+        public async void removeKitAsync()
+        {
+            if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(account))
+            {
+                MessageBox.Show("Please select a user and account");
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(kit))
+            {
+                var kitToRemove = await Kits.getKitAsync(kit);
+                var itemsToRemove = kitToRemove.itemList;
+
+                foreach (var itemInKit in itemsToRemove)
+                {
+                    var itemInDB = await Item.getItemMongoDBAsync(itemInKit.item);
+                    itemInDB.quantity -= itemInKit.quantity;
+
+                    await itemInDB.setItemMongoDBAsync();
+
+                    var logEntry = new InventoryLog
+                    {
+                        user = user,
+                        account = account,
+                        itemID = itemInDB.item,
+                        description = $"{itemInDB.description} ({ kit })",
+                        quantityBefore = itemInDB.quantity + itemInKit.quantity,
+                        quantityChanged = -itemInKit.quantity,
+                        quantityAfter = itemInDB.quantity,
+                        dateTime = DateTime.UtcNow.ToLocalTime()
+                    };
+
+                    await logEntry.addLogToEntryAsync();
+                }
+
+                refreshUIAsync();
+            }
+        }
+
+        public void exportToCsv()
+        {
+            using (var writer = File.CreateText("itemExport.csv"))
+            {
+                var header = new List<string>
+                {
+                    "Item ID",
+                    "Description",
+                    "Quantity"
+                };
+
+                writer.WriteLine(string.Join(",", header));
+
+                foreach (var item in itemList)
+                {
+                    var toCSV = new List<string>
+                    {
+                        item.item.Replace(',', ';'),
+                        item.description.Replace(',', ';'),
+                        item.quantity.ToString()
+                    };
+
+                    writer.WriteLine(string.Join(",", toCSV));
+                }
+            }
+
+            Process.Start("itemExport.csv");
         }
     }
 }

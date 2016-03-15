@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory", "reliacoatInven
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "mongoDBassembly\DataModel.csproj", "{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTextSharpAssembly", "iTextSharpAssembly\iTextSharpAssembly.csproj", "{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Export", "Export\Export.csproj", "{2113430A-F4E0-4231-8566-A4045F131EEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70B90FA5-4E22-42D6-A78D-6FA0DFB3C330}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E5D9C1F-E426-46EE-9075-6D1C6AD3D777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2113430A-F4E0-4231-8566-A4045F131EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2113430A-F4E0-4231-8566-A4045F131EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2113430A-F4E0-4231-8566-A4045F131EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2113430A-F4E0-4231-8566-A4045F131EEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace reliacoatInventory.Views
+namespace Inventory.Views
 {
     /// <summary>
     /// Interaction logic for InventoryLog.xaml

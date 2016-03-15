@@ -23,7 +23,7 @@ namespace DataModel
 
         public static string collection = "Log";
 
-        public async static Task<List<InventoryLog>> getLogEntryList()
+        public async static Task<List<InventoryLog>> getLogEntryListAsync()
         {
             var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
             var filter = Builders<InventoryLog>.Filter.Exists("_id");
@@ -32,18 +32,14 @@ namespace DataModel
             return new List<InventoryLog>(logList);
         }
 
-        public async static Task<List<InventoryLog>> getLogEntryList(FilterDefinition<InventoryLog> finalFilter)
+        public async Task appendLogEntryAsync()
         {
             var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
-            var sort = Builders<InventoryLog>.Sort.Descending("dateTime");
-            var logList = await logCol.Find(finalFilter)
-                .Sort(sort)
-                .ToListAsync();
-
-            return logList;
+            var filter = Builders<InventoryLog>.Filter.Eq("_id", Id);
+            await logCol.FindOneAndReplaceAsync(filter, this);
         }
 
-        public async void addLogToEntry()
+        public async Task addLogToEntryAsync()
         {
             var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
             await logCol.InsertOneAsync(this);

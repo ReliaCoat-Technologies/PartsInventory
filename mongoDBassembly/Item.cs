@@ -19,7 +19,7 @@ namespace DataModel
         public static string collection = "Items";
         public static string itemField = "item";
 
-        public async static Task<ObservableCollection<Item>> getItemListMongoDB()
+        public async static Task<ObservableCollection<Item>> getItemListMongoDBAsync()
         {
             var itemCol = MongoDBServer<Item>.openMongoDB(collection);
 
@@ -32,7 +32,19 @@ namespace DataModel
             return new ObservableCollection<Item>(colList);
         }
 
-        public async static Task<Item> getItemMongoDB(string itemName)
+        public async static Task<ObservableCollection<string>> getKitItemListAsync()
+        {
+            var itemListRaw = await getItemListMongoDBAsync();
+
+            var list = new ObservableCollection<string>();
+
+            foreach (var item in itemListRaw)
+                list.Add($"{item.item} <{item.description}>");
+
+            return list;
+        }
+
+        public async static Task<Item> getItemMongoDBAsync(string itemName)
         {
             var itemCol = MongoDBServer<Item>.openMongoDB(collection);
 
@@ -42,25 +54,30 @@ namespace DataModel
             return itemSelected;
         }
 
-        public async void setItemMongoDB()
+        public async Task setItemMongoDBAsync()
         {
             var itemCol = MongoDBServer<Item>.openMongoDB(collection);
 
-            var filter = Builders<Item>.Filter.Eq("Id", Id);
-            await itemCol.FindOneAndReplaceAsync(filter, this);
-        }
+            var query = from itemQuery in itemCol.AsQueryable()
+                        where itemQuery.Id == Id
+                        select itemQuery.Id;
 
-        public async void addItemMongoDB()
-        {
-            var itemCol = MongoDBServer<Item>.openMongoDB(collection);
+            var queryList = query.ToList();
+
+            if (queryList.Count > 0)
+            {
+                var filter = Builders<Item>.Filter.Eq(nameof(item), item);
+                await itemCol.FindOneAndDeleteAsync(filter);
+            }
+
             await itemCol.InsertOneAsync(this);
         }
 
-        public async void deleteItemMongoDB()
+        public async Task deleteItemMongoDBAsync()
         {
             var itemCol = MongoDBServer<Item>.openMongoDB(collection);
 
-            var filter = Builders<Item>.Filter.Eq("Id", Id);
+            var filter = Builders<Item>.Filter.Eq(nameof(Id), Id);
             await itemCol.FindOneAndDeleteAsync(filter);
         }
     }

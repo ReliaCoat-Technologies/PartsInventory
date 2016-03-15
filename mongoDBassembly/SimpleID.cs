@@ -16,10 +16,10 @@ namespace DataModel
         public ObjectId Id { get; set; }
         public string value { get; set; }
 
-        public async static Task<ObservableCollection<string>> getIDListMongoDB(string collection)
+        public async static Task<ObservableCollection<string>> getIDListMongoDBAsync(string collection)
         {
             var col = MongoDBServer<SimpleID>.openMongoDB(collection);
-            var filter = Builders<SimpleID>.Filter.Exists("Id");
+            var filter = Builders<SimpleID>.Filter.Exists(nameof(Id));
             var simpleIDListRaw = await col.Find(filter).ToListAsync();
 
             var simpleIDList = from item in simpleIDListRaw
@@ -29,25 +29,25 @@ namespace DataModel
             return new ObservableCollection<string>(simpleIDList.ToList());
         }
 
-        public async static Task<SimpleID> getIDMongoDB(string value, string collection)
+        public async static Task<SimpleID> getIDMongoDBAsync(string value, string collection)
         {
             var col = MongoDBServer<SimpleID>.openMongoDB(collection);
-            var filter = Builders<SimpleID>.Filter.Eq("value", value);
+            var filter = Builders<SimpleID>.Filter.Eq(nameof(value), value);
             var simpleID = await col.Find(filter).FirstOrDefaultAsync();
 
             return simpleID;
         }
 
-        public async void addIDMongoDB(string collection)
+        public async Task addIDMongoDBAsync(string collection)
         {
             var col = MongoDBServer<SimpleID>.openMongoDB(collection);
             await col.InsertOneAsync(this);
         }
 
-        public async void removeIDmongoDB(string collection)
+        public static async Task removeIDmongoDBAsync(string collection, string value)
         {
             var col = MongoDBServer<SimpleID>.openMongoDB(collection);
-            var filter = Builders<SimpleID>.Filter.Eq("Id", Id);
+            var filter = Builders<SimpleID>.Filter.Eq(nameof(value), value);
             await col.FindOneAndDeleteAsync(filter);
         }
     }

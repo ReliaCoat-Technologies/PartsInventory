@@ -9,18 +9,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DevExpress.Xpf.Core;
 
-
-namespace Inventory
+namespace Inventory.Views
 {
     /// <summary>
-    /// Interaction logic for ReliacoatInventory.xaml
+    /// Interaction logic for UsersAccounts.xaml
     /// </summary>
-    public partial class ReliacoatInventory : DXWindow
+    public partial class UsersAccounts : UserControl
     {
-        public ReliacoatInventory()
+        public UsersAccounts()
         {
             InitializeComponent();
         }

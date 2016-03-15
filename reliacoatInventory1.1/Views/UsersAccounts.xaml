@@ -1,0 +1,34 @@
+﻿<UserControl xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  x:Class="Inventory.Views.UsersAccounts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:ViewModels="clr-namespace:Inventory.ViewModels"
+             mc:Ignorable="d"
+             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:UsersAccountsViewModel}">
+    <UniformGrid Columns="2">
+
+        <dxlc:GroupBox Header="Users" Margin="5,0">
+            <DockPanel Margin="5">
+                <UniformGrid DockPanel.Dock="Bottom" Columns="2">
+                    <Button Content="Add User" Margin="5" Command="{Binding addUserAsyncCommand}"/>
+                    <Button Content="Remove User" Margin="5" Command="{Binding removeUserAsyncCommand}"/>
+                </UniformGrid>
+                <TextBox DockPanel.Dock="Bottom" Margin="5" Text="{Binding user}"/>
+                <ListBox Margin="5" ItemsSource="{Binding userList}" SelectedIndex="{Binding userIndex}"/>
+            </DockPanel>
+        </dxlc:GroupBox>
+
+        <dxlc:GroupBox Header="Accounts" Margin="5,0">
+            <DockPanel Margin="5">
+                <UniformGrid DockPanel.Dock="Bottom" Columns="2">
+                    <Button Content="Add Account" Margin="5" Command="{Binding addAccountAsyncCommand}"/>
+                    <Button Content="Remove Account" Margin="5" Command="{Binding removeAccountAsyncCommand}"/>
+                </UniformGrid>
+                <TextBox DockPanel.Dock="Bottom" Margin="5" Text="{Binding account}"/>
+                <ListBox Margin="5" ItemsSource="{Binding accountList}" SelectedIndex="{Binding accountIndex}"/>
+            </DockPanel>
+        </dxlc:GroupBox>
+
+    </UniformGrid>
+</UserControl>

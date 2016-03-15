@@ -1,10 +1,10 @@
 ﻿<dx:DXWindow xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
-    x:Class="reliacoatInventory.ReliacoatInventory"
+    x:Class="Inventory.ReliacoatInventory"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:Views="clr-namespace:reliacoatInventory.Views"
-    xmlns:ViewModels="clr-namespace:reliacoatInventory.ViewModels"
+    xmlns:Views="clr-namespace:Inventory.Views"
+    xmlns:ViewModels="clr-namespace:Inventory.ViewModels"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     DataContext="{dxmvvm:ViewModelSource Type={x:Type ViewModels:ReliacoatInventoryViewModel}}"
     dx:ThemeManager.Theme="MetropolisDark"
@@ -18,14 +18,26 @@
         </dxb:MainMenuControl>
 
         <dx:DXTabControl>
+
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand EventName="SelectionChanged" Command="{Binding grandRefreshUICommand}"/>
+            </dxmvvm:Interaction.Triggers>
+            
             <dx:DXTabItem Header="Item Inventory">
-                <Views:ItemInventory/>
+                <Views:ItemInventory DataContext="{Binding inventoryViewModel}"/>
             </dx:DXTabItem>
             <dx:DXTabItem Header="Log Report">
-                <Views:InventoryLog/>
+                <Views:InventoryLog DataContext="{Binding inventoryLogViewModel}"/>
             </dx:DXTabItem>
-            <dx:DXTabItem Header="Users and Accounts"></dx:DXTabItem>
-            <dx:DXTabItem Header="Kits"></dx:DXTabItem>
+            <dx:DXTabItem Header="Inventory Management">
+                <UniformGrid Columns="2">
+                    <Views:InventoryManager DataContext="{Binding inventoryManagerViewModel}"/>
+                    <Views:UsersAccounts DataContext="{Binding userAccountsViewModel}"/>
+                </UniformGrid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Kits">
+                <Views:ItemKits DataContext="{Binding itemKitsViewModel}"/>
+            </dx:DXTabItem>
         </dx:DXTabControl>
     </DockPanel>
 </dx:DXWindow>
