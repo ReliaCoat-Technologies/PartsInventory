@@ -51,7 +51,7 @@
 
             <UniformGrid Columns="2">
                 <Button Content="Export to CSV" Margin="5" Command="{Binding exportToCsvCommand}"/>
-                <Button Content="Export to PDF" Margin="5"/>
+                <Button Content="Export to PDF" Margin="5" Click="showPrintPreview"/>
             </UniformGrid>
 
             <dxb:StatusBarControl>

@@ -15,5 +15,10 @@ namespace Inventory.Views
         {
             InitializeComponent();
         }
+
+        private void showPrintPreview(object sender, RoutedEventArgs e)
+        {
+            itemGrid.ShowPrintPreviewDialog(this.Parent as Window, "Item Inventory", "Item Inventory");
+        }
     }
 }
