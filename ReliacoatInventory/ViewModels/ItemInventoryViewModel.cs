@@ -1,9 +1,6 @@
 ﻿using System;
 using DevExpress.Mvvm.DataAnnotations;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Collections.Generic;
-using System.Diagnostics;
 using DataModel;
 using DevExpress.Mvvm.POCO;
 using System.Windows;
@@ -59,28 +56,31 @@ namespace ReliacoatInventory.ViewModels
             {
                 item.quantity = item.quantity + qtyToAdd - qtyToRemove;
                 await item.setItemMongoDBAsync();
+
+                var logEntry = new InventoryLog
+                {
+                    user = user,
+                    account = account,
+                    itemID = item.item,
+                    description = item.description,
+                    quantityBefore = item.quantity - qtyToAdd + qtyToRemove,
+                    quantityChanged = qtyToAdd - qtyToRemove,
+                    quantityAfter = item.quantity,
+                    dateTime = DateTime.UtcNow.ToLocalTime()
+                };
+
+                await logEntry.addLogToEntryAsync();
+
+                var addRemoveString = qtyToAdd - qtyToRemove >= 0 ? "added" : "removed";
+                var quantityChanged = Math.Abs(qtyToAdd - qtyToRemove);
+
+                statusBarText = $"{user} has {addRemoveString} {quantityChanged} of {item.item}({item.description})";
+
+                refreshUIAsync();
+
+                qtyToAdd = 0;
+                qtyToRemove = 0;
             }
-
-            var logEntry = new InventoryLog
-            {
-                user = user,
-                account = account,
-                itemID = item.item,
-                description = item.description,
-                quantityBefore = item.quantity - qtyToAdd + qtyToRemove,
-                quantityChanged = qtyToAdd - qtyToRemove,
-                quantityAfter = item.quantity,
-                dateTime = DateTime.UtcNow.ToLocalTime()
-            };
-
-            await logEntry.addLogToEntryAsync();
-
-            var addRemoveString = qtyToAdd - qtyToRemove >= 0 ? "added" : "removed";
-            var quantityChanged = Math.Abs(qtyToAdd - qtyToRemove);
-
-            statusBarText = $"{user} has {addRemoveString} {quantityChanged} of {item.item}({item.description})";
-
-            refreshUIAsync();
         }
 
         public async void removeKitAsync()
@@ -91,35 +91,34 @@ namespace ReliacoatInventory.ViewModels
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(kit))
+            if (string.IsNullOrWhiteSpace(kit)) return;
+
+            var kitToRemove = await Kits.getKitAsync(kit);
+            var itemsToRemove = kitToRemove.itemList;
+
+            foreach (var itemInKit in itemsToRemove)
             {
-                var kitToRemove = await Kits.getKitAsync(kit);
-                var itemsToRemove = kitToRemove.itemList;
+                var itemInDb = await Item.getItemMongoDBAsync(itemInKit.item);
+                itemInDb.quantity -= itemInKit.quantity;
 
-                foreach (var itemInKit in itemsToRemove)
+                await itemInDb.setItemMongoDBAsync();
+
+                var logEntry = new InventoryLog
                 {
-                    var itemInDB = await Item.getItemMongoDBAsync(itemInKit.item);
-                    itemInDB.quantity -= itemInKit.quantity;
+                    user = user,
+                    account = account,
+                    itemID = itemInDb.item,
+                    description = $"{itemInDb.description} ({ kit })",
+                    quantityBefore = itemInDb.quantity + itemInKit.quantity,
+                    quantityChanged = -itemInKit.quantity,
+                    quantityAfter = itemInDb.quantity,
+                    dateTime = DateTime.UtcNow.ToLocalTime()
+                };
 
-                    await itemInDB.setItemMongoDBAsync();
-
-                    var logEntry = new InventoryLog
-                    {
-                        user = user,
-                        account = account,
-                        itemID = itemInDB.item,
-                        description = $"{itemInDB.description} ({ kit })",
-                        quantityBefore = itemInDB.quantity + itemInKit.quantity,
-                        quantityChanged = -itemInKit.quantity,
-                        quantityAfter = itemInDB.quantity,
-                        dateTime = DateTime.UtcNow.ToLocalTime()
-                    };
-
-                    await logEntry.addLogToEntryAsync();
-                }
-
-                refreshUIAsync();
+                await logEntry.addLogToEntryAsync();
             }
+
+            refreshUIAsync();
         }
 
         public void createReport()

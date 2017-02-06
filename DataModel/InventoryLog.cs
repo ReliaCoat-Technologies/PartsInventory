@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using System.Collections.ObjectModel;
 
 namespace DataModel
 {
@@ -32,10 +29,17 @@ namespace DataModel
             return new List<InventoryLog>(logList);
         }
 
+        public async static Task<InventoryLog> getLogEntryAsync(ObjectId id)
+        {
+            var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
+            var filter = Builders<InventoryLog>.Filter.Where(x => x.Id == id);
+            return await logCol.Find(filter).FirstOrDefaultAsync();
+        }
+
         public async Task appendLogEntryAsync()
         {
             var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
-            var filter = Builders<InventoryLog>.Filter.Eq("_id", Id);
+            var filter = Builders<InventoryLog>.Filter.Where(x => x.Id == Id);
             await logCol.FindOneAndReplaceAsync(filter, this);
         }
 
@@ -43,6 +47,13 @@ namespace DataModel
         {
             var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
             await logCol.InsertOneAsync(this);
+        }
+
+        public async Task removeLogAsync()
+        {
+            var logCol = MongoDBServer<InventoryLog>.openMongoDB(collection);
+            var filter = Builders<InventoryLog>.Filter.Where(x => x.Id == Id);
+            await logCol.FindOneAndDeleteAsync(filter);
         }
     }
 }

@@ -23,8 +23,6 @@
             </ComboBox>
         </DockPanel>
 
-        <Button DockPanel.Dock="Bottom" Content="Export" Margin="5" Click="ExportKit"/>
-
         <DockPanel DockPanel.Dock="Bottom">
             <UniformGrid Columns="2">
                 <DockPanel>
@@ -33,9 +31,10 @@
                     <ComboBox ItemsSource="{Binding itemComboBoxList, Mode=TwoWay}" SelectedIndex="{Binding itemIndex}" Margin="5"/>
                 </DockPanel>
 
-                <UniformGrid Columns="2">
-                    <Button DockPanel.Dock="Right" Content="Add To Kit" Margin="5" Command="{Binding addToKitAsyncCommand}"/>
-                    <Button DockPanel.Dock="Right" Content="Remove From Kit" Margin="5" Command="{Binding removeFromKitCommand}"/>
+                <UniformGrid Columns="3">
+                    <Button Content="Add To Kit" Margin="5" Command="{Binding addToKitAsyncCommand}"/>
+                    <Button Content="Remove From Kit" Margin="5" Command="{Binding removeFromKitCommand}"/>
+                    <Button Content="Export Kit" Margin="5" Command="{Binding createReportCommand}"/>
                 </UniformGrid>
 
             </UniformGrid>

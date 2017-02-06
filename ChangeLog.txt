@@ -1,0 +1,7 @@
+Version 0.1.0.1 - Internal Beta
+
+- Update UI for DevExpress
+- Bug: Log updates even though there is no user or account
+- Resets add or remove stock to 0 after updating stock
+
+Version 0.1.0.0 - Initial Release

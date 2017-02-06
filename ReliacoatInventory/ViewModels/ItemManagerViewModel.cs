@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using DataModel;
 using MongoDB.Bson;
 using DevExpress.Mvvm.POCO;
+using System;
 
 namespace ReliacoatInventory.ViewModels
 {
@@ -19,6 +20,7 @@ namespace ReliacoatInventory.ViewModels
         public ItemManagerViewModel()
         {
             refreshUIAsync();
+            LogViewModel.QuantityAdjusted += adjustFromLog;
         }
 
         public static ItemManagerViewModel Create()
@@ -27,6 +29,13 @@ namespace ReliacoatInventory.ViewModels
         }
 
         // Methods
+        private async void adjustFromLog(string itemID, int quantityAdjusted)
+        {
+            var item = await Item.getItemMongoDBAsync(itemID);
+            item.quantity += quantityAdjusted;
+            await item.setItemMongoDBAsync();
+        }
+
         public async void refreshUIAsync()
         {
             itemList = await Item.getItemListMongoDBAsync();

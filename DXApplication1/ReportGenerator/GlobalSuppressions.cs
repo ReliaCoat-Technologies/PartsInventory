@@ -6,3 +6,5 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CC0091:Use static method", Justification = "<Pending>", Scope = "member", Target = "~M:ReportGenerator.App.OnAppStartup_UpdateThemeName(System.Object,System.Windows.StartupEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CC0022:Should dispose object", Justification = "<Pending>", Scope = "member", Target = "~M:ReportGenerator.ItemReport.createTable")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CC0022:Should dispose object", Justification = "<Pending>", Scope = "member", Target = "~M:ReportGenerator.ItemReport.createHeader(System.String)~DevExpress.XtraReports.UI.XRRichText")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CC0022:Should dispose object", Justification = "<Pending>", Scope = "member", Target = "~M:ReportGenerator.LogReport.createTable~DevExpress.XtraReports.UI.XRTable")]

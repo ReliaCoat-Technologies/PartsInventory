@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using DevExpress.Xpf.Grid;
+using ReliacoatInventory.ViewModels;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ReliacoatInventory.Views
 {
@@ -21,12 +12,14 @@ namespace ReliacoatInventory.Views
     {
         public Log()
         {
+            LogViewModel.GetSortInfo += getSortedInfo;
+
             InitializeComponent();
         }
 
-        private void ExportLog(object sender, RoutedEventArgs e)
+        private GridSortInfoCollection getSortedInfo()
         {
-            logGrid.ShowPrintPreviewDialog(this.Parent as Window, "Log", "Log");
+            return gridControl.SortInfo;
         }
     }
 }

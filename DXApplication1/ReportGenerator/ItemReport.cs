@@ -10,6 +10,8 @@ namespace ReportGenerator
 {
     public partial class ItemReport : DevExpress.XtraReports.UI.XtraReport
     {
+        // Statics
+
         // Properties
         public ObservableCollection<Item> itemList { get; set; }
 
@@ -18,9 +20,11 @@ namespace ReportGenerator
             InitializeComponent();
         }
 
-        public ItemReport(ObservableCollection<Item> input)
+        public ItemReport(ObservableCollection<Item> input, string kit)
         {
             InitializeComponent();
+            if (!string.IsNullOrWhiteSpace(kit)) // Difference between kit and current inventory
+                xrLabel1.Text = kit;
             itemList = input;
             this.Detail.Controls.Add(createTable());
         }

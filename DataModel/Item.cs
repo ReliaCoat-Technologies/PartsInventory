@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
@@ -11,6 +8,7 @@ namespace DataModel
 {
     public sealed class Item
     {
+        // Properties
         public ObjectId Id { get; set; }
         public string item { get; set; }
         public string description { get; set; }
@@ -58,19 +56,18 @@ namespace DataModel
         {
             var itemCol = MongoDBServer<Item>.openMongoDB(collection);
 
-            var query = from itemQuery in itemCol.AsQueryable()
+            var item = (from itemQuery in itemCol.AsQueryable()
                         where itemQuery.Id == Id
-                        select itemQuery.Id;
+                        select itemQuery).FirstOrDefault();
 
-            var queryList = query.ToList();
-
-            if (queryList.Count > 0)
+            if (item != null)
             {
-                var filter = Builders<Item>.Filter.Eq(nameof(item), item);
-                await itemCol.FindOneAndDeleteAsync(filter);
+                var filter = Builders<Item>.Filter.Where(x => x.Id == item.Id);
+                await itemCol.FindOneAndReplaceAsync(filter, this);
             }
-
-            await itemCol.InsertOneAsync(this);
+            else
+                await itemCol.InsertOneAsync(this);
+            
         }
 
         public async Task deleteItemMongoDBAsync()

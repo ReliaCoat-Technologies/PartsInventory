@@ -9,17 +9,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Core;
 
-namespace ReliacoatInventory.Views
+namespace ReliacoatInventory
 {
     /// <summary>
-    /// Interaction logic for KitManager.xaml
+    /// Interaction logic for InventorySplash.xaml
     /// </summary>
-    public partial class KitManager : UserControl
+    public partial class InventorySplash : UserControl
     {
-        public KitManager()
+        public InventorySplash()
         {
             InitializeComponent();
         }

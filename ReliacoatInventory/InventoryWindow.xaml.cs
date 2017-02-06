@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using DataModel;
 using DevExpress.Xpf.Core;
-
 
 namespace ReliacoatInventory
 {
     /// <summary>
     /// Interaction logic for InventoryWindow.xaml
     /// </summary>
-    public partial class InventoryWindow : DXWindow
+    public partial class InventoryWindow : DXTabbedWindow
     {
         public InventoryWindow()
         {
-            InitializeComponent();
+            DXSplashScreen.Show<InventorySplash>();
+
+            var connectionTest = MongoDBServer<Item>.pingMongoServer();
+
+            DXSplashScreen.Close();
+
+            if (!connectionTest)
+                MessageBox.Show("Server connection not established.");
+            else
+                InitializeComponent();
         }
     }
 }

@@ -1,20 +1,27 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System.Configuration;
 
 namespace DataModel
 {
-    class MongoDBServer<POCOType>
+    public static class MongoDBServer<T>
     {
-        protected static readonly string database = "Inventory";
-        protected static readonly string connectionString = ConfigurationManager.ConnectionStrings["MongoLocalHost"].ConnectionString;
+        public static readonly string database = "Inventory";
+        public static readonly string connectionString = ConfigurationManager.ConnectionStrings["MongoRemoteHost"].ConnectionString;
 
-        public static IMongoCollection<POCOType> openMongoDB(string collection)
+        public static IMongoCollection<T> openMongoDB(string collection)
         {
             var client = new MongoClient(connectionString);
             var db = client.GetDatabase(database);
-            var col = db.GetCollection<POCOType>(collection);
+            return db.GetCollection<T>(collection);
+        }
 
-            return col;
+        public static bool pingMongoServer()
+        {
+            var client = new MongoClient(connectionString);
+            var db = client.GetDatabase(database);
+            // Pinging the MongoDB server. Will return false if no connection available.
+            return db.RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(5000);
         }
     }
 }

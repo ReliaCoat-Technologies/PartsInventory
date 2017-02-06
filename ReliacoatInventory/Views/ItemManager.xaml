@@ -9,8 +9,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" xmlns:ViewModels="clr-namespace:ReliacoatInventory.ViewModels"
              mc:Ignorable="d"
-             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ItemManagerViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:ItemManagerViewModel}">
     
     <dxlc:GroupBox x:Name="groupBox" Header="Items">
         <DockPanel>

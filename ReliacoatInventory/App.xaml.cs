@@ -15,9 +15,9 @@ namespace ReliacoatInventory
     {
         private void OnAppStartup_UpdateThemeName(object sender, StartupEventArgs e)
         {
-            var theme = new Theme("MetropolisDarkBlue", "DevExpress.Xpf.Themes.MetropolisDarkBlue.v15.2")
+            var theme = new Theme("MetropolisDarkBlue", "DevExpress.Xpf.Themes.MetropolisDarkBlue.v16.2")
             {
-                AssemblyName = "DevExpress.Xpf.Themes.MetropolisDarkBlue.v15.2"
+                AssemblyName = "DevExpress.Xpf.Themes.MetropolisDarkBlue.v16.2"
             };
             Theme.RegisterTheme(theme);
 

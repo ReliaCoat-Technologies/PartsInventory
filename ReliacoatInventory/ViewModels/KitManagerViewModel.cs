@@ -48,8 +48,7 @@ namespace ReliacoatInventory.ViewModels
         {
             if (itemIndex >= 0)
             {
-                const char delimiter = '<';
-                var stringList = itemComboBoxList[itemIndex].Split(delimiter);
+                var stringList = itemComboBoxList[itemIndex].Split('<');
                 var itemName = stringList[0].Trim();
 
                 var itemToAdd = await Item.getItemMongoDBAsync(itemName);
@@ -100,6 +99,12 @@ namespace ReliacoatInventory.ViewModels
         {
             await Kits.removeFromKitCollectionAsync(kitName);
             refreshUIAsync();
+        }
+
+        public void createReport()
+        {
+            var report = new ReportGenerator.MainWindow(itemList, kitName);
+            report.Show();
         }
     }
 }
